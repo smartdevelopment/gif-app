@@ -23,6 +23,7 @@ export class GifsService {
 
     this._tagHistory.unshift( tag );
     this._tagHistory = this._tagHistory.splice(0,10);
+    this.saveLocalStorage();
 
   }
 
@@ -48,6 +49,10 @@ export class GifsService {
       }
 
     );
+  }
+
+  private saveLocalStorage():void {
+    localStorage.setItem('tagHistory', JSON.stringify(this._tagHistory));
   }
 
   constructor(private http: HttpClient) { }
