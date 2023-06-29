@@ -55,6 +55,20 @@ export class GifsService {
     localStorage.setItem('tagHistory', JSON.stringify(this._tagHistory));
   }
 
-  constructor(private http: HttpClient) { }
+  getLocalStorage():void {
+    if ( localStorage.getItem('tagHistory') ) {
+      this._tagHistory = JSON.parse( localStorage.getItem('tagHistory')! );
+      console.log('tagHistory from LS', this._tagHistory);
+      let fisrtTag = this._tagHistory[0];
+      this.searchTag(fisrtTag);
+    } else {
+      console.log('no hay tagHistory');
+    }
+  }
+
+  constructor(private http: HttpClient) {
+
+    this.getLocalStorage();
+   }
 
 }
